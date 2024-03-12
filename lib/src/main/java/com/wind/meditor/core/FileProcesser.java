@@ -39,10 +39,10 @@ public class FileProcesser {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
                 String zipEntryName = entry.getName();
 
-//                Log.d(" zipEntryName = " + zipEntryName);
-
                 // ignore signature files, we will resign it.
-                if (zipEntryName.startsWith("META-INF")) {
+                if (zipEntryName.startsWith("META-INF") && (zipEntryName.endsWith(".SF") || zipEntryName.endsWith(".DSA") || zipEntryName.endsWith(".RSA") || zipEntryName.endsWith(".MF"))) {
+                    //'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+                    Log.d(" zipEntryName = " + zipEntryName);
                     continue;
                 }
 

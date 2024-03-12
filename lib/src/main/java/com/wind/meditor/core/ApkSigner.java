@@ -15,18 +15,22 @@ public class ApkSigner {
             long time = System.currentTimeMillis();
             File keystoreFile = new File(keyStorePath);
             if (keystoreFile.exists()) {
-                StringBuilder signCmd;
-                signCmd = new StringBuilder("jarsigner ");
-                signCmd.append(" -keystore ")
-                        .append(keyStorePath)
-                        .append(" -storepass ")
-                        .append("manifest_editor")
-                        .append(" -signedjar ")
-                        .append(" " + signedApkPath + " ")
-                        .append(" " + apkPath + " ")
-                        .append(" -digestalg SHA1 -sigalg SHA1withRSA ")
-                        .append(" key0 ");
-                String result = ShellCmdUtil.execCmd(signCmd.toString(), null);
+                String[] signCmd = new String[]{
+                        "jarsigner",
+                        "-keystore",
+                        keyStorePath,
+                        "-storepass",
+                        "manifest_editor",
+                        "-signedjar",
+                        signedApkPath,
+                        apkPath,
+                        "-digestalg",
+                        "SHA1",
+                        "-sigalg",
+                        "SHA1withRSA",
+                        "key0"
+                };
+                String result = ShellCmdUtil.execCmd(signCmd, null);
                 Log.i(" sign apk time is : " + ((System.currentTimeMillis() - time)) +
                         "ms\n\n" + "  result=" + result);
             }

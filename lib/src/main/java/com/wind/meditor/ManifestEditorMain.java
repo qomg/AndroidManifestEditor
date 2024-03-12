@@ -164,25 +164,26 @@ public class ManifestEditorMain extends BaseCommand {
             if (needSignApk) {
                 Log.i("Start to sign the apk.");
 
-                String parentPath = null;
-                String keyStoreFilePath = null;
-                File parentFile = new File(output).getParentFile();
-
-                if (parentFile != null) {
-                    parentPath = parentFile.getAbsolutePath();
-                    keyStoreFilePath = parentPath + File.separator + "keystore";
-                } else {
-                    // 当前命令行所在的目录
-                    keyStoreFilePath = "keystore";
-                }
-                Log.d(" parentPath = " + parentPath + " keyStoreFilePath = " + keyStoreFilePath);
+//                String parentPath = null;
+//                String keyStoreFilePath = null;
+//                File parentFile = new File(output).getParentFile();
+//
+//                if (parentFile != null) {
+//                    parentPath = parentFile.getAbsolutePath();
+//                    keyStoreFilePath = parentPath + File.separator + "keystore";
+//                } else {
+//                    // 当前命令行所在的目录
+//                    keyStoreFilePath = "keystore";
+//                }
+//                Log.d(" parentPath = " + parentPath + " keyStoreFilePath = " + keyStoreFilePath);
 
                 Log.i(" output unsigned apk path = " + output);
                 Log.i(" output signed apk path = " + signedApkPath);
 
 
                 // cannot use File.separator to seperate assets/new_keystore，or IOException is thrown on window os
-                Utils.copyFileFromJar("assets/new_keystore", keyStoreFilePath);
+                String keyStoreFilePath = File.createTempFile("keystore", ".jks").getAbsolutePath();
+                Utils.copyFileFromJar("new_keystore", keyStoreFilePath);
 
                 ApkSigner.signApk(output, keyStoreFilePath, signedApkPath);
 

@@ -27,8 +27,9 @@ public class ResourceIdXmlReader {
     private static final Map<String, Integer> attrCachedMap = new HashMap<>();
 
     public static int parseIdFromXml(String name) {
-        String filePath = "assets/public.xml";
+        String filePath = "public.xml";
         InputStream inputStream = Utils.getInputStreamFromFile(filePath);
+        if (inputStream == null) return -1;
         try {
             Integer cacherId = attrCachedMap.get(name);
             if (cacherId != null && cacherId > 0) {

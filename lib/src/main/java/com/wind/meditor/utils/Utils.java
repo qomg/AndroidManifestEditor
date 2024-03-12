@@ -118,7 +118,7 @@ public class Utils {
             while ((len = in.read(b)) != -1) {
                 out.write(b, 0, len);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close(out);
