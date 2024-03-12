@@ -1,11 +1,21 @@
 plugins {
     id 'java-library'
+//    id 'java-library-distribution'
 }
 
- java {
-     sourceCompatibility JavaVersion.VERSION_1_8
-     targetCompatibility JavaVersion.VERSION_1_8
- }
+//distributions {
+//    main {
+//        distributionBaseName = 'ManifestEditor'
+//        contents {
+//            from 'src/dist'
+//        }
+//    }
+//}
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
 
 dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -17,14 +27,14 @@ jar {
     manifest {
         attributes 'Main-Class': 'com.wind.meditor.ManifestEditorMain'
     }
-    //添加将引用的jar的源码打入最终的jar
-    from {
-        (configurations.runtime).collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
+//    //添加将引用的jar的源码打入最终的jar
+//    from {
+//        (configurations.runtime).collect {
+//            it.isDirectory() ? it : zipTree(it)
+//        }
+//    }
 
-    from fileTree(dir:'src/main', includes: ['assets/**'])
+//    from fileTree(dir: 'src/main', includes: ['assets/**'])
 
     //排除引用的jar中的签名信息
     exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'

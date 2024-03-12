@@ -5,7 +5,7 @@ package com.wind.meditor.utils;
  */
 public class Log {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     public static void i(String msg) {
         System.out.println(msg);
